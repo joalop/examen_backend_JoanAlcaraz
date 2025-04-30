@@ -22,6 +22,30 @@ app.get('/comidas', (req, res) => {
 
 
 
+//Ejercicio 2
+let array = [];
+
+let Obj = {
+    min:null,
+    max:null,
+};
+
+app.post('/minmax', (req, res) => {
+
+    array.push( req.body.number );
+
+    if(array.length == 1){
+        Obj.min = array[0];
+        Obj.max = array[0];
+    }else{
+        for( let i=0; i < array.length; i++ ){
+            if( array[i] < Obj.min){  Obj.min =  array[i]  };
+            if( array[i] > Obj.max){  Obj.max =  array[i]  };
+        }
+    }
+
+    res.send( JSON.stringify( Obj ) );
+});
 
 app.listen(port, () => {
     console.log('Listen in port: ',port);
