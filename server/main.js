@@ -47,6 +47,25 @@ app.post('/minmax', (req, res) => {
     res.send( JSON.stringify( Obj ) );
 });
 
+
+//Ejercicio 3
+// Recibe por parametro una id que se presupone que es numero
+// La sentencia sql esta correcta si los usuarios estan en la tabla users
+// Si la conexion viene correctamente de la variable db, la sentencia de envio es correcta
+/*  Se recomienda si ocurriese un error en la sentencia  a la base de datos
+    ponerlo entre el bloque try{} catch(){} para controlar el error
+*/
+// falta una condicion de que en caso de error se emita una llamada res ya que si ocurre un error se cortara el flujo.
+app.put('/users', (res, req) => {
+    const userId = req.params.id;
+    const sql = `DELETE FROM users WHERE id=${userID}`;
+    db.query(sql, (error, result) => {
+        if(error) throw error;
+        res.send(`User ${userId} deleted from the db.`);
+    })
+})
+
+
 app.listen(port, () => {
     console.log('Listen in port: ',port);
 })
